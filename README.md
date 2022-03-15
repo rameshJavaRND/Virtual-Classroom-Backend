@@ -1,2 +1,14 @@
 # Virtual-Classroom-Backend
-Backend with node
+
+Install the app -
+
+```
+npm install
+cp config.env.template config.env
+```
+
+Run the app -
+
+```
+nodemon index.js
+```
