@@ -1,0 +1,32 @@
+{
+  "name": "virtual-classroom-backend",
+  "version": "1.0.0",
+  "description": "Virtual Classroom Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rameshJavaRND/Virtual-Classroom-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rameshJavaRND/Virtual-Classroom-Backend/issues"
+  },
+  "homepage": "https://github.com/rameshJavaRND/Virtual-Classroom-Backend#readme",
+  "dependencies": {
+    "nodemon": "^2.0.15",
+    "axios": "^0.25.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "dotenv": "^14.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.7"
+  }
+}
