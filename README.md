@@ -1,4 +1,7 @@
 # The-Virtual-Classroom
+
+## Project Description
+ 
 The Virtual Classroom is a collaborative teaching tool to assist the students to learn in an interactive manner.  It aims to complement the efforts of teachers to integrate technology into their classrooms and link the students to the Internet in educationally productive ways and provide them a stimulating, positive and enjoyable environment to study.
 
 It contains the following elements:-
@@ -40,3 +43,17 @@ It displays a list of ppts & videos posted by the faculty members. The administr
 d)      Question/Ans
 
 It displays a list of  questions asked by students/answers to questions by teachers. The administrator has the power to delete questions/answers from the list.
+
+
+## Install the app -
+
+```
+npm install
+cp config.env.template config.env
+```
+
+Run the app -
+
+```
+nodemon index.js
+```
