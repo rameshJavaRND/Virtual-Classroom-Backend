@@ -31,5 +31,5 @@ app.use("/api", api);
 // app.use("/", web);
 
 app.listen(PORT, () => {
-  console.log(`Vitual Classroom Server started`);
+  console.log(`Virtual Classroom Server started`);
 });
