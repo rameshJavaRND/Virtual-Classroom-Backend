@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-const Question = require("../models/Question");
+// const Answer = require("../models/Answer");
 
 /**
  * @Author Faraz
- * @Controller Question Create Controller
+ * @Controller Answer Create Controller
  */
 
 const create = async (req, res) => {
@@ -15,7 +15,7 @@ const create = async (req, res) => {
       quesName: req.body.quesName,
       subject: req.body.subject,
     };
-    const question = await Question.create(questionData);
+    const question = await Answer.create(questionData);
     return res.json({
       question,
     });
@@ -26,18 +26,6 @@ const create = async (req, res) => {
   }
 };
 
-const list = async (req, res) => {
-  const questions = await Question.find().populate({
-    path: "askedby",
-    select: "-pass -createdAt -updatedAt",
-  });
-
-  return res.json({
-    questions,
-  });
-};
-
 module.exports = {
   create,
-  list,
 };

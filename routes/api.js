@@ -4,13 +4,16 @@ const authJWT = require("../middlewares/authJWT");
 
 const studentController = require("../controllers/studentController");
 const questionController = require("../controllers/questionController");
+const answerController = require("../controllers/answerController");
 
 // Login and Register routes
-
-router.post("/login", studentController.login);
 router.post("/register", studentController.register);
-router.post("/question", authJWT.verifyToken, questionController.create);
+router.post("/login", studentController.login);
+router.get("/student", [authJWT.verifyToken], studentController.list);
 
-// router.post("/login/student", studentController.login);
+// Question and Answer routes
+router.post("/question", authJWT.verifyToken, questionController.create);
+router.get("/question", authJWT.verifyToken, questionController.list);
+// router.post("/answer", authJWT.verifyToken, answerController.create);
 
 module.exports = router;

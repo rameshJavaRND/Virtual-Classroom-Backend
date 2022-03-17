@@ -78,7 +78,16 @@ const login = async (req, res) => {
   }
 };
 
+// List All Students Details
+const list = async (req, res) => {
+  const student = await Student.find();
+  return res.json({
+    student,
+  });
+};
+
 module.exports = {
   register,
   login,
+  list,
 };
