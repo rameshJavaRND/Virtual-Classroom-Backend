@@ -63,9 +63,7 @@ const login = async (req, res) => {
         expiresIn: 86400, // 24 hours
       }
     );
-    // if (!req.body.username || !req.body.password) {
-
-    // }
+    
     return res.status(200).send({
       student,
       access_token: token,
