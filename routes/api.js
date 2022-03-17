@@ -23,8 +23,8 @@ router.post("/fregister", [
 ],facultyController.registerUser);
 
 router.post("/flogin",[
-    check("username").notEmpty().withMessage("Username is required").trim().isAlphanumeric().withMessage("Username should be alphanumeric"),
-    check("password").notEmpty().withMessage("Password is required.").trim().isLength({min:6}).withMessage("Password must be at least 6 character long")
+    check("username").notEmpty().withMessage("Username is required").trim(),
+    check("password").notEmpty().withMessage("Password is required.").trim()
 ], facultyController.loginUser);
 
 
