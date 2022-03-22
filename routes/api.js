@@ -19,7 +19,10 @@ router.get("/student", [authJWT.verifyToken], studentController.list);
 // Question and Answer routes
 router.post("/question", authJWT.verifyToken, questionController.create);
 router.get("/question", authJWT.verifyToken, questionController.list);
-// router.post("/answer", authJWT.verifyToken, answerController.create);
+
+router.post("/answer", authJWT.verifyToken, answerController.create);
+router.get("/answer", authJWT.verifyToken, answerController.list);
+
 // Faculty Login and Register routes
 router.post(
   "/fregister",

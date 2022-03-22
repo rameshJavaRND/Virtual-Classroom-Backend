@@ -63,7 +63,7 @@ const login = async (req, res) => {
         expiresIn: 86400, // 24 hours
       }
     );
-    
+
     return res.status(200).send({
       student,
       access_token: token,

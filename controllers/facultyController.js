@@ -1,8 +1,8 @@
 const userModel = require("../models/Faculty");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { secretJWTKey } = require("../middlewares/verify");
-const { check, validationResult } = require('express-validator')
+// const { secretJWTKey } = require("../middlewares/verify");
+const { check, validationResult } = require("express-validator");
 
 /**
  * @Author Bishal
@@ -11,12 +11,14 @@ const { check, validationResult } = require('express-validator')
 
 const registerUser = async (req, res) => {
   try {
-    const errors=validationResult(req);
-    if(!errors.isEmpty()){
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
       return res.json({ errors });
     }
 
-    const userAlreadyExist = await userModel.findOne({username: req.body.username});
+    const userAlreadyExist = await userModel.findOne({
+      username: req.body.username,
+    });
 
     if (userAlreadyExist) {
       return res.json({ message: "Username already exists!!" });
@@ -46,11 +48,10 @@ const registerUser = async (req, res) => {
   }
 };
 
-
 const loginUser = async (req, res) => {
   try {
-    const errors=validationResult(req);
-    if(!errors.isEmpty()){
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
       return res.json({ errors });
     }
 
@@ -70,13 +71,14 @@ const loginUser = async (req, res) => {
 
     const token = jwt.sign(
       {
+        _id: userExist._id,
         username: userExist.username,
         name: userExist.name,
         phone_no: userExist.phone_no,
         subject: userExist.subject,
         branch: userExist.branch,
       },
-      secretJWTKey,
+      process.env.JWT_SECRET,
       { expiresIn: "6h" }
     );
     return res.json({ message: "Login succesfull!", token });
@@ -88,7 +90,6 @@ const loginUser = async (req, res) => {
     });
   }
 };
-
 
 module.exports = {
   registerUser,

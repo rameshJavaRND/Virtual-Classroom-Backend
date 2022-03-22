@@ -5,15 +5,15 @@ const Question = require("../models/Question");
 
 /**
  * @Author Faraz
- * @Controller Question Create Controller
+ * @Controller Question Create, List Controller
  */
 
 const create = async (req, res) => {
   try {
     let questionData = {
+      quesContent: req.body.quesContent,
+      quesSubject: req.body.quesSubject,
       askedby: req.user._id,
-      quesName: req.body.quesName,
-      subject: req.body.subject,
     };
     const question = await Question.create(questionData);
     return res.json({
@@ -27,10 +27,14 @@ const create = async (req, res) => {
 };
 
 const list = async (req, res) => {
-  const questions = await Question.find().populate({
-    path: "askedby",
-    select: "-pass -createdAt -updatedAt",
-  });
+  const questions = await Question.find()
+    .populate({
+      path: "askedby",
+      select: "-pass -createdAt -updatedAt",
+    })
+    .populate({
+      path: "answer",
+    });
 
   return res.json({
     questions,

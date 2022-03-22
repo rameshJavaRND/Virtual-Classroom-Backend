@@ -1,23 +1,24 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const SchemaTypes = mongoose.Schema.Types;
 require("dotenv").config();
 require("mongoose-long")(mongoose);
 const QuestionID = require("./Question");
+const Faculty = require("./Faculty");
 
 const AnswerSchema = new mongoose.Schema(
   {
-    quesId: {
-      type: SchemaTypes.ObjectId,
-      ref: QuestionID.model("question"),
-      immutable: true,
-    },
-    answer: {
+    answerContent: {
       type: String,
       required: true,
     },
     answerBy: {
-      type: String,
+      type: SchemaTypes.ObjectId,
+      ref: "Faculty",
       required: true,
+    },
+    question: {
+      type: SchemaTypes.ObjectId,
+      ref: "question",
     },
   },
   {
@@ -25,4 +26,4 @@ const AnswerSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("question", AnswerSchema);
+module.exports = mongoose.model("answer", AnswerSchema);
