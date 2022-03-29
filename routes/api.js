@@ -7,6 +7,19 @@ const studentController = require("../controllers/studentController");
 const questionController = require("../controllers/questionController");
 const answerController = require("../controllers/answerController");
 
+const adminController = require("../controllers/adminController");
+
+// Admin Routes
+
+router.post("/adminLogin", adminController.login);
+router.get("/adminquestion", authJWT.verifyToken, adminController.list);
+router.delete(
+  "/deletequestion/:id",
+  [authJWT.verifyToken],
+  adminController.destroy
+);
+router.put("/editquestion/:id", [authJWT.verifyToken], adminController.update);
+
 // Login and Register routes
 const facultyController = require("../controllers/facultyController");
 
@@ -24,6 +37,9 @@ router.post("/answer", authJWT.verifyToken, answerController.create);
 router.get("/answer", authJWT.verifyToken, answerController.list);
 
 // Faculty Login and Register routes
+
+router.get("/allfaculty", facultyController.allfaculty);
+
 router.post(
   "/fregister",
   [

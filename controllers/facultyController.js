@@ -91,7 +91,21 @@ const loginUser = async (req, res) => {
   }
 };
 
+const allfaculty = async (req, res) => {
+  const listfaculty = await userModel.find({});
+  if (listfaculty !== null) {
+    return res.json({
+      listfaculty: listfaculty,
+    });
+  } else {
+    return res.json({
+      message: "No faculty to display!!",
+    });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
+  allfaculty,
 };
