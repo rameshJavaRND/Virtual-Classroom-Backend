@@ -3,7 +3,8 @@ const dotenv = require("dotenv");
 const path = require("path");
 const cors = require("cors");
 
-const api = require("./routes/api");
+const subjectRoutes = require("./routes/subjectRoutes");
+const branchRoutes = require("./routes/branchRoutes");
 // const web = require("./routes/web");
 
 const connectDB = require("./services/database");
@@ -27,9 +28,18 @@ app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
 app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 
 // Load Routers
-app.use("/api", api);
+app.use("/subject", subjectRoutes);
+app.use("/branch", branchRoutes);
 // app.use("/", web);
 
 app.listen(PORT, () => {
   console.log(`Vitual Classroom Server started`);
 });
+app.use((err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+  err.status = err.status || 'error';
+  res.status(err.statusCode).json({
+      status: err.status,
+      massage: err.massage
+  })
+})
