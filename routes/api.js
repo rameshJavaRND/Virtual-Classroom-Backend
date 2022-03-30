@@ -9,6 +9,8 @@ const questionController = require("../controllers/questionController");
 const answerController = require("../controllers/answerController");
 const adminController = require("../controllers/adminController");
 const facultyController = require("../controllers/facultyController");
+const branchController = require("../controllers/branchController");
+const subjectController = require("../controllers/subjectController");
 
 // Admin Routes
 router.post("/adminLogin", adminController.login);
@@ -79,5 +81,16 @@ router.post(
   ],
   facultyController.loginUser
 );
+
+//Subject upload, edit and get all routes
+router.post("/subjectUpload", subjectController.subjectUpload);
+router.get("/allSubjects", subjectController.fetchAllSubjects)
+router.put("/editSubject/:id", subjectController.editSubject)
+
+//Branch upload, edit and get all routes
+router.post("/addBranch", branchController.addBranch);
+router.get("/getAllBranches", branchController.getAllBranches);
+router.put("/editBranch/:id", branchController.editBranch);
+
 
 module.exports = router;
