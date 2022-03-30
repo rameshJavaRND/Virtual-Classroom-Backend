@@ -87,7 +87,7 @@ const destroy = async (req, res) => {
 
   try {
     await Question.findByIdAndDelete(id);
-    // await Answer.findByIdAndDelete(answer._id);
+    // await Answer.findByIdAndDelete(answer.id);
     res.json({
       message: "Question deleted successfully!",
     });
