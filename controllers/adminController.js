@@ -5,6 +5,12 @@ const bcrypt = require("bcryptjs");
 const Answer = require("../models/Answer");
 const Question = require("../models/Question");
 
+
+/**
+ * @Author Mukul
+ * @Controller Login Controller
+ */
+
 const login = async (req, res) => {
   try {
     const admin = await userModel
@@ -48,8 +54,8 @@ const login = async (req, res) => {
 };
 
 /**
- * @Author Faraz
- * @Controller list, update, delete Question Controller
+ * @Author Faraz, Bishal
+ * @Controller List, Edit, Delete Question Controller
  */
 
 const list = async (req, res) => {
@@ -81,7 +87,7 @@ const destroy = async (req, res) => {
 
   try {
     await Question.findByIdAndDelete(id);
-    // await Answer.findByIdAndDelete(answer._id);
+    // await Answer.findByIdAndDelete(answer.id);
     res.json({
       message: "Question deleted successfully!",
     });

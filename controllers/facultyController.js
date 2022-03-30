@@ -6,7 +6,7 @@ const { check, validationResult } = require("express-validator");
 
 /**
  * @Author Bishal
- * @Controller Faculty Register and Login Controller
+ * @Controller Faculty Register, Login and allfaculty Controller
  */
 
 const registerUser = async (req, res) => {
