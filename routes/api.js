@@ -84,13 +84,12 @@ router.post(
 
 //Subject upload, edit and get all routes
 router.post("/subjectUpload", subjectController.subjectUpload);
-router.get("/allSubjects", subjectController.fetchAllSubjects)
-router.put("/editSubject/:id", subjectController.editSubject)
+router.get("/allSubjects", subjectController.fetchAllSubjects);
+router.put("/editSubject/:id", subjectController.editSubject);
 
 //Branch upload, edit and get all routes
 router.post("/addBranch", branchController.addBranch);
 router.get("/getAllBranches", branchController.getAllBranches);
 router.put("/editBranch/:id", branchController.editBranch);
-
 
 module.exports = router;
