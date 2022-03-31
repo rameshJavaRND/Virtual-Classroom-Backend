@@ -5,7 +5,6 @@ const bcrypt = require("bcryptjs");
 const Answer = require("../models/Answer");
 const Question = require("../models/Question");
 
-
 /**
  * @Author Mukul
  * @Controller Login Controller
@@ -67,7 +66,6 @@ const list = async (req, res) => {
     .populate({
       path: "answer",
     });
-
   return res.json({
     questions,
   });
@@ -76,39 +74,29 @@ const list = async (req, res) => {
 const destroy = async (req, res) => {
   const id = req.params.id;
 
-  // const questions = await Question.find()
-  //   .populate({
-  //     path: "askedby",
-  //     select: "-pass -createdAt -updatedAt",
-  //   })
-  //   .populate({
-  //     path: "answer",
-  //   });
-
   try {
     await Question.findByIdAndDelete(id);
-    // await Answer.findByIdAndDelete(answer.id);
+    await Answer.deleteMany({ question: id });
     res.json({
-      message: "Question deleted successfully!",
+      message: "Question and answer deleted successfully!",
     });
   } catch {
     res.status(500).json({
-      message: "Could not delete Question with id = " + id,
+      message: "Could not delete Question and answer with id = " + id,
     });
   }
 };
 
 const update = async (req, res) => {
   const id = req.params.id;
-
   try {
     await Question.findByIdAndUpdate(id, req.body);
     res.json({
-      message: "Question updated successfully!",
+      message: "Question and answer updated successfully!",
     });
   } catch {
     res.status(500).json({
-      message: "Could not Edit Question with id = " + id,
+      message: "Could not Edit Question answer with id = " + id,
     });
   }
 };
