@@ -24,6 +24,8 @@ router.delete(
   adminController.destroy
 );
 router.put("/editquestion/:id", [authJWT.verifyToken], adminController.update);
+router.get("/admin/:id", [authJWT.verifyToken], adminController.showDetails);
+
 
 // Student Login, Register, list, update and get routes
 router.post("/login", studentController.login);
