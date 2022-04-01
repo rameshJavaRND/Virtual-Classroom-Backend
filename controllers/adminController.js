@@ -1,4 +1,4 @@
-const userModel = require("../models/Admin");
+const AdminModel = require("../models/Admin");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -6,13 +6,13 @@ const Answer = require("../models/Answer");
 const Question = require("../models/Question");
 
 /**
- * @Author Mukul
- * @Controller Login Controller
+ * @Author Mukul, Abhishek
+ * @Controller Login, Showdetails Controller
  */
 
 const login = async (req, res) => {
   try {
-    const admin = await userModel
+    const admin = await AdminModel
       .findOne({
         username: req.body.username,
       })
@@ -51,6 +51,16 @@ const login = async (req, res) => {
     });
   }
 };
+
+const showDetails = async (req, res) => {
+    try {
+        const id=req.params.id;
+        const admin_data = await AdminModel.findById(id)
+        return res.json(admin_data);
+    } catch (error) {
+        return res.send(error);
+    }
+}
 
 /**
  * @Author Faraz, Bishal
@@ -106,4 +116,5 @@ module.exports = {
   list,
   update,
   destroy,
+  showDetails,
 };
