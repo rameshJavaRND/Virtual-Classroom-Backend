@@ -104,8 +104,57 @@ const allfaculty = async (req, res) => {
   }
 };
 
+/**
+ * @Author Lavi
+ * @Controller Faculty Update and getProfile Controller
+ */
+
+const updateProfile = async (req, res) => {
+    try {
+      console.log(req.params.id);
+      console.log(req.body);
+      const update = await userModel.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+      });
+      res.status(200).json({
+        status: "success",
+        data: {
+          update,
+        },
+      });
+    } catch (err) {
+      res.status(400).json({
+        status: "fail",
+        message: err,
+      });
+    }
+  };
+  const getProfile = async (req, res) => {
+      try {
+        console.log(req.params.id);
+        console.log(req.body);
+        const profiledetails = await userModel.findById(req.params.id, {
+        });
+        res.status(200).json({
+          status: "success",
+          data: {
+            profiledetails,
+          },
+        });
+      } catch (err) {
+        res.status(400).json({
+          status: "fail",
+          message: err,
+        });
+      }
+    };
+  
+
 module.exports = {
   registerUser,
   loginUser,
   allfaculty,
+  updateProfile,
+  getProfile,
 };

@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const authJWT = require("../middlewares/authJWT");
 const { check, validationResult } = require("express-validator");
+const {upload} = require('../helpers/filehelper');
+const {singleFileUpload, multipleFileUpload,
+     getallSingleFiles, getallMultipleFiles} = require('../controllers/fileuploaderController');
 
 // Controllers list
 const studentController = require("../controllers/studentController");
@@ -22,10 +25,11 @@ router.delete(
 );
 router.put("/editquestion/:id", [authJWT.verifyToken], adminController.update);
 
-// Student Login and Register routes
+// Student Login, Register, list, update and get routes
 router.post("/login", studentController.login);
 router.post("/register", studentController.register);
-router.get("/student", [authJWT.verifyToken], studentController.list);
+router.get("/student", authJWT.verifyToken, studentController.list);
+router.route("/:id").patch(studentController.updateProfile).get(studentController.getProfile);
 
 // Question and Answer routes
 router.post("/question", authJWT.verifyToken, questionController.create);
@@ -34,7 +38,6 @@ router.post("/answer", authJWT.verifyToken, answerController.create);
 router.get("/answer", authJWT.verifyToken, answerController.list);
 
 // Faculty Login and Register routes
-
 router.get("/allfaculty", facultyController.allfaculty);
 router.post(
   "/fregister",
@@ -81,6 +84,7 @@ router.post(
   ],
   facultyController.loginUser
 );
+router.route("/:id").patch(facultyController.updateProfile).get(facultyController.getProfile);
 
 //Subject upload, edit and get all routes
 router.post("/subjectUpload", subjectController.subjectUpload);
@@ -91,5 +95,11 @@ router.put("/editSubject/:id", subjectController.editSubject);
 router.post("/addBranch", branchController.addBranch);
 router.get("/getAllBranches", branchController.getAllBranches);
 router.put("/editBranch/:id", branchController.editBranch);
+
+//PPT routes
+router.post('/singleFile', upload.single('file'), singleFileUpload);
+router.post('/multipleFiles', upload.array('files'), multipleFileUpload);
+router.get('/getSingleFiles', getallSingleFiles);
+router.get('/getMultipleFiles', getallMultipleFiles);
 
 module.exports = router;
