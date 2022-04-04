@@ -63,9 +63,7 @@ const login = async (req, res) => {
         expiresIn: 86400, // 24 hours
       }
     );
-    // if (!req.body.username || !req.body.password) {
 
-    // }
     return res.status(200).send({
       student,
       access_token: token,
@@ -78,7 +76,68 @@ const login = async (req, res) => {
   }
 };
 
+// List All Students Details
+const list = async (req, res) => {
+  const student = await Student.find();
+  return res.json({
+    student,
+  });
+};
+
+
+/**
+ * @Author Lavi
+ * @Controller Student Update, Get Controller
+ */
+
+
+const updateProfile = async (req, res) => {
+    try {
+      console.log(req.params.id);
+      console.log(req.body);
+      const student = await Student.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+      });
+      res.status(200).json({
+        status: "success",
+        data: {
+          student,
+        },
+      });
+    } catch (err) {
+      res.status(400).json({
+        status: "fail",
+        message: err,
+      });
+    }
+  };
+  const getProfile = async (req, res) => {
+      try {
+        console.log(req.params.id);
+        console.log(req.body);
+        const student = await Student.findById(req.params.id, {
+        });
+        res.status(200).json({
+          status: "success",
+          data: {
+            student,
+          },
+        });
+      } catch (err) {
+        res.status(400).json({
+          status: "fail",
+          message: err,
+        });
+      }
+    };
+  
+
+
 module.exports = {
   register,
   login,
+  list,
+  updateProfile,
+  getProfile,
 };

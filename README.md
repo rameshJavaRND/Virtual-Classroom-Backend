@@ -1,4 +1,4 @@
-# The-Virtual-Classroom
+# The-Virtual-Classrooms
 
 ## Project Description
  
@@ -58,3 +58,14 @@ Run the app -
 nodemon index.js
 ```
 
+## API routes -
+
+```
+Faculty routes
+
+a) faculty login
+http://localhost:3001/api/flogin
+
+
+b) faculty signup
+http://localhost:3001/api/fregister

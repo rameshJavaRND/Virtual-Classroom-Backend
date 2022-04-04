@@ -2,25 +2,26 @@ const mongoose = require("mongoose");
 require("mongoose-long")(mongoose);
 const SchemaTypes = mongoose.Schema.Types;
 const Student = require("./Student");
+const Answer = require("./Answer");
 
 const QuestionSchema = new mongoose.Schema(
   {
-    quesId: {
-      type: SchemaTypes.ObjectId,
-      immutable: true,
+    quesContent: {
+      type: String,
+      required: true,
     },
-    quesName: {
+    quesSubject: {
       type: String,
       required: true,
     },
     askedby: {
       type: SchemaTypes.ObjectId,
-      ref: Student.model("student"),
+      ref: "student",
       required: true,
     },
-    subject: {
-      type: String,
-      required: true,
+    answer: {
+      type: SchemaTypes.ObjectId,
+      ref: "answer",
     },
   },
   {
