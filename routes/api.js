@@ -14,6 +14,7 @@ const adminController = require("../controllers/adminController");
 const facultyController = require("../controllers/facultyController");
 const branchController = require("../controllers/branchController");
 const subjectController = require("../controllers/subjectController");
+const fileuploaderController = require("../controllers/fileuploaderController");
 
 // Admin Routes
 router.post("/adminLogin", adminController.login);
@@ -101,7 +102,7 @@ router.put("/editBranch/:id", branchController.editBranch);
 //PPT routes
 router.post('/singleFile', upload.single('file'), singleFileUpload);
 router.post('/multipleFiles', upload.array('files'), multipleFileUpload);
-router.get('/getSingleFiles', getallSingleFiles);
-router.get('/getMultipleFiles', getallMultipleFiles);
+router.get('/getSingleFiles', fileuploaderController.getallSingleFiles);
+router.get('/getMultipleFiles', fileuploaderController.getallMultipleFiles);
 
 module.exports = router;
