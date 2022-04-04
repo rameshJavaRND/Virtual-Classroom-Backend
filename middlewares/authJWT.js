@@ -15,7 +15,11 @@ verifyToken = (req, res, next) => {
         message: "Unauthorized!",
       });
     }
-    req.user = decoded.user;
+    if (decoded.student != null) {
+      req.user = decoded.student;
+    } else {
+      req.user = decoded;
+    }
     next();
   });
 };
