@@ -84,8 +84,45 @@ const list = async (req, res) => {
   });
 };
 
+/**
+ * @Author Lavi
+ * @Controller Student Update and getProfile Controller
+ */
+
+const updateProfile = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    await Student.findByIdAndUpdate(id, req.body);
+    res.json({
+      message: "Profile updated successfully!",
+    });
+  } catch {
+    res.status(500).json({
+      message: "Could not Edit Profile with id = " + id,
+    });
+  }
+};
+
+const getProfile = async (req, res) => {
+  const id = req.params.id;
+  try{
+  const studentProfile = await Student.findById(id);
+  return res.json({
+    studentProfile,
+  });
+}catch{
+  res.status(500).json({
+      message: "Could not find Profile with id = " + id,
+    });
+}
+};
+
+
 module.exports = {
   register,
   login,
   list,
+  updateProfile,
+  getProfile,
 };
