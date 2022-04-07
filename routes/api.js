@@ -18,6 +18,7 @@ const adminController = require("../controllers/adminController");
 const facultyController = require("../controllers/facultyController");
 const branchController = require("../controllers/branchController");
 const subjectController = require("../controllers/subjectController");
+const fileuploaderController = require("../controllers/fileuploaderController");
 
 // Admin Routes
 router.post("/adminLogin", adminController.login);
