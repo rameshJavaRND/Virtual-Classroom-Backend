@@ -92,7 +92,7 @@ const loginUser = async (req, res) => {
 };
 
 const allfaculty = async (req, res) => {
-  const listfaculty = await userModel.find({});
+  const listfaculty = await userModel.find();
   if (listfaculty !== null) {
     return res.json({
       listfaculty: listfaculty,
@@ -110,46 +110,41 @@ const allfaculty = async (req, res) => {
  */
 
 const updateProfile = async (req, res) => {
-    try {
-      console.log(req.params.id);
-      console.log(req.body);
-      const update = await userModel.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-        runValidators: true,
-      });
-      res.status(200).json({
-        status: "success",
-        data: {
-          update,
-        },
-      });
-    } catch (err) {
-      res.status(400).json({
-        status: "fail",
-        message: err,
-      });
-    }
-  };
-  const getProfile = async (req, res) => {
-      try {
-        console.log(req.params.id);
-        console.log(req.body);
-        const profiledetails = await userModel.findById(req.params.id, {
-        });
-        res.status(200).json({
-          status: "success",
-          data: {
-            profiledetails,
-          },
-        });
-      } catch (err) {
-        res.status(400).json({
-          status: "fail",
-          message: err,
-        });
-      }
-    };
-  
+  try {
+    const update = await userModel.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    res.status(200).json({
+      status: "success",
+      data: {
+        update,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: err,
+    });
+  }
+};
+
+const getProfile = async (req, res) => {
+  try {
+    const profiledetails = await userModel.findById(req.params.id, {});
+    res.status(200).json({
+      status: "success",
+      data: {
+        profiledetails,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: err,
+    });
+  }
+};
 
 module.exports = {
   registerUser,

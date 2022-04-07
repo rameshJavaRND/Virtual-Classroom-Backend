@@ -52,15 +52,22 @@ const login = async (req, res) => {
   }
 };
 
-const showDetails = async (req, res) => {
-    try {
-        const id=req.params.id;
-        const admin_data = await AdminModel.findById(id)
-        return res.json(admin_data);
-    } catch (error) {
-        return res.send(error);
-    }
-}
+// const showDetails = async (req, res) => {
+//     try {
+//         const id=req.params.id;
+//         const admin_data = await AdminModel.findById(id)
+//         return res.json(admin_data);
+//     } catch (error) {
+//         return res.send(error);
+//     }
+// }
+
+const listprofile = async (req, res) => {
+  const admin = await AdminModel.find();
+  return res.json({
+    admin,
+  });
+};
 
 /**
  * @Author Faraz, Bishal
@@ -116,5 +123,6 @@ module.exports = {
   list,
   update,
   destroy,
-  showDetails,
+  // showDetails,
+  listprofile
 };

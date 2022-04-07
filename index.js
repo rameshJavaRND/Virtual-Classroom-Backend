@@ -7,9 +7,9 @@ const api = require("./routes/api");
 // const web = require("./routes/web");
 
 const connectDB = require("./services/database");
-const bodyParser = require('body-parser');
-const fileRoutes = require('./routes/file-upload-routes');
-const api = require("./routes/facultyRoutes");
+const bodyParser = require("body-parser");
+// const fileRoutes = require("./routes/file-upload-routes");
+// const api = require("./routes/facultyRoutes");
 const app = express();
 
 dotenv.config({
@@ -26,13 +26,13 @@ app.set("view engine", "ejs");
 
 // load assets
 app.use(bodyParser.json());
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use('/api', fileRoutes.routes);
+// app.use("/api", fileRoutes.routes);
 app.use(bodyParser.json());
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use('/api', fileRoutes.routes);
+// app.use("/api", fileRoutes.routes);
 app.use("/faculty", api);
 app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
 app.use("/js", express.static(path.resolve(__dirname, "assets/js")));

@@ -2,9 +2,13 @@ const express = require("express");
 const router = express.Router();
 const authJWT = require("../middlewares/authJWT");
 const { check, validationResult } = require("express-validator");
-const {upload} = require('../helpers/filehelper');
-const {singleFileUpload, multipleFileUpload,
-     getallSingleFiles, getallMultipleFiles} = require('../controllers/fileuploaderController');
+const { upload } = require("../helpers/filehelper");
+const {
+  singleFileUpload,
+  multipleFileUpload,
+  getallSingleFiles,
+  getallMultipleFiles,
+} = require("../controllers/fileuploaderController");
 
 // Controllers list
 const studentController = require("../controllers/studentController");
@@ -24,14 +28,17 @@ router.delete(
   adminController.destroy
 );
 router.put("/editquestion/:id", [authJWT.verifyToken], adminController.update);
-router.get("/admin/:id", [authJWT.verifyToken], adminController.showDetails);
-
+// router.get("/admin/:id", [authJWT.verifyToken], adminController.showDetails);
+router.get("/listprofile", authJWT.verifyToken, adminController.list);
 
 // Student Login, Register, list, update and get routes
 router.post("/login", studentController.login);
 router.post("/register", studentController.register);
 router.get("/student", authJWT.verifyToken, studentController.list);
-router.route("/:id").patch(studentController.updateProfile).get(studentController.getProfile);
+router
+  .route("/student/:id")
+  .patch(studentController.updateProfile)
+  .get(studentController.getProfile);
 
 // Question and Answer routes
 router.post("/question", authJWT.verifyToken, questionController.create);
@@ -86,7 +93,10 @@ router.post(
   ],
   facultyController.loginUser
 );
-router.route("/:id").patch(facultyController.updateProfile).get(facultyController.getProfile);
+router
+  .route("/faculty/:id")
+  .patch(facultyController.updateProfile)
+  .get(facultyController.getProfile);
 
 //Subject upload, edit and get all routes
 router.post("/subjectUpload", subjectController.subjectUpload);
@@ -99,9 +109,9 @@ router.get("/getAllBranches", branchController.getAllBranches);
 router.put("/editBranch/:id", branchController.editBranch);
 
 //PPT routes
-router.post('/singleFile', upload.single('file'), singleFileUpload);
-router.post('/multipleFiles', upload.array('files'), multipleFileUpload);
-router.get('/getSingleFiles', getallSingleFiles);
-router.get('/getMultipleFiles', getallMultipleFiles);
+router.post("/singleFile", upload.single("file"), singleFileUpload);
+router.post("/multipleFiles", upload.array("files"), multipleFileUpload);
+router.get("/getSingleFiles", getallSingleFiles);
+router.get("/getMultipleFiles", getallMultipleFiles);
 
 module.exports = router;
