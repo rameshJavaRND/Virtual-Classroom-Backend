@@ -70,12 +70,14 @@ http://localhost:3000/api/feditProfile/id - edit specific faculty profile detail
 
 http://localhost:3000/api/adminLogin - admin login
 
+
 http://localhost:3000/api/allSubjects - list all subjects
 http://localhost:3000/api/allBranches - list all branches
 http://localhost:3000/api/addSubject - add subject
 http://localhost:3000/api/addBranch - add branch
 http://localhost:3000/api/editSubject/id - edit subject
 http://localhost:3000/api/editBranch/id - edit branch
+
 
 http://localhost:3000/api/singleFile - upload single file
 http://localhost:3000/api/multipleFiles - upload multiple files
