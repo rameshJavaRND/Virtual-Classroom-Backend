@@ -32,7 +32,7 @@ router.put("/editquestion/:id", authJWT.verifyToken, adminController.update);
 router.get("/listprofile", authJWT.verifyToken, adminController.listprofile);
 
 
-// Student Login and Register routes
+// Student routes
 router.post("/login", studentController.login);
 router.post("/register", studentController.register);
 router.get("/student", authJWT.verifyToken, studentController.list);
@@ -45,7 +45,7 @@ router.get("/question", authJWT.verifyToken, questionController.list);
 router.post("/answer", authJWT.verifyToken, answerController.create);
 router.get("/answer", authJWT.verifyToken, answerController.list);
 
-// Faculty Login, Register, Listall, routes
+// Faculty routes
 router.get("/studentallfaculty", facultyController.studentallfaculty);
 router.get("/adminallfaculty", facultyController.adminallfaculty);
 router.post("/fregister", facultyController.registerUser);
@@ -53,12 +53,12 @@ router.post("/flogin", facultyController.loginUser);
 router.put("/feditProfile/:id", facultyController.updateProfile);
 router.get("/fgetProfile/:id", facultyController.getProfile);
 
-//Subject upload, edit and get all routes
+//Subject routes
 router.post("/addSubject", subjectController.addSubject);
 router.get("/allSubjects", subjectController.allSubjects);
 router.put("/editSubject/:id", subjectController.editSubject);
 
-//Branch upload, edit and get all routes
+//Branch routes
 router.post("/addBranch", branchController.addBranch);
 router.get("/allBranches", branchController.allBranches);
 router.put("/editBranch/:id", branchController.editBranch);

@@ -1,6 +1,11 @@
 const SingleFile = require("../models/singlefile");
 const MultipleFile = require("../models/multiplefile");
 
+/**
+ * @Author Lavi
+ * @Controller PPT upload and get Controller
+ */
+
 const singleFileUpload = async (req, res, next) => {
   const file = new SingleFile({
     fileName: req.file.originalname,

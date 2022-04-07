@@ -5,7 +5,7 @@ const Student = require("../models/Student");
 
 /**
  * @Author Faraz
- * @Controller Student Register,Login  Controller
+ * @Controller Student Register, Login, list Controller
  */
 
 const register = async (req, res) => {

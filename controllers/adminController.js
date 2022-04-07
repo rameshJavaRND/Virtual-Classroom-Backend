@@ -8,7 +8,7 @@ const Question = require("../models/Question");
 
 /**
  * @Author Mukul
- * @Controller Login, Listprofile Controller
+ * @Controller Login and Listprofile Controller
  */
 
 const login = async (req, res) => {
@@ -62,7 +62,7 @@ const listprofile = async (req, res) => {
 
 /**
  * @Author Faraz, Bishal
- * @Controller List, Edit, Delete Question Controller
+ * @Controller List, Edit and Delete Question Controller
  */
 
 const list = async (req, res) => {
