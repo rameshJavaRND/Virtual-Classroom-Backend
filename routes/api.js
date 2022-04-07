@@ -36,6 +36,8 @@ router.get("/listprofile", authJWT.verifyToken, adminController.listprofile);
 router.post("/login", studentController.login);
 router.post("/register", studentController.register);
 router.get("/student", authJWT.verifyToken, studentController.list);
+router.put("/editProfile/:id", studentController.updateProfile);
+router.get("/getProfile/:id", studentController.getProfile);
 
 // Question and Answer routes
 router.post("/question", authJWT.verifyToken, questionController.create);
@@ -48,8 +50,8 @@ router.get("/studentallfaculty", facultyController.studentallfaculty);
 router.get("/adminallfaculty", facultyController.adminallfaculty);
 router.post("/fregister", facultyController.registerUser);
 router.post("/flogin", facultyController.loginUser);
-router.put("/editProfile/:id", facultyController.updateProfile);
-router.get("/getProfile/:id", facultyController.getProfile);
+router.put("/feditProfile/:id", facultyController.updateProfile);
+router.get("/fgetProfile/:id", facultyController.getProfile);
 
 //Subject upload, edit and get all routes
 router.post("/addSubject", subjectController.addSubject);

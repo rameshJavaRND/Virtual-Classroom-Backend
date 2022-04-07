@@ -1,7 +1,6 @@
 const userModel = require("../models/Faculty");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-// const { secretJWTKey } = require("../middlewares/verify");
 const { check, validationResult } = require("express-validator");
 
 /**
@@ -33,7 +32,7 @@ const registerUser = async (req, res) => {
       branch: req.body.branch,
     };
 
-    const result = await userModel.create(userData);
+    await userModel.create(userData);
 
     return res.json({
       message: "User registration success",
