@@ -39,7 +39,6 @@ const registerUser = async (req, res) => {
       status: 200,
     });
   } catch (err) {
-    console.log(err);
     return res.json({
       message: "Something went wrong!!",
       status: 500,
@@ -82,7 +81,6 @@ const loginUser = async (req, res) => {
     );
     return res.json({ message: "Login succesfull!", token });
   } catch (err) {
-    console.log(err);
     return res.json({
       message: "Something went wrong!!",
       status: 500,

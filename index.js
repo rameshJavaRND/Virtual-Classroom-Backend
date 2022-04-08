@@ -11,7 +11,7 @@ dotenv.config({
   path: "config.env",
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 connectDB();
 
 app.use(cors());
@@ -24,5 +24,5 @@ app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
 app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 app.use("/api", api);
 app.listen(PORT, () => {
-  console.log(`Virtual Classroom Server started`);
+  console.log(`Virtual Classroom Server started at ${PORT}`);
 });
