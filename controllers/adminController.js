@@ -8,7 +8,7 @@ const Question = require("../models/Question");
 
 /**
  * @Author Mukul
- * @Controller Login and Listprofile Controller
+ * @Controller Login Controller
  */
 
 const login = async (req, res) => {
@@ -53,16 +53,10 @@ const login = async (req, res) => {
   }
 };
 
-const listprofile = async (req, res) => {
-  const admin = await userModel.find();
-  return res.json({
-    admin,
-  });
-};
 
 /**
  * @Author Faraz, Bishal
- * @Controller List, Edit and Delete Question Controller
+ * @Controller List, Edit, Delete Question and Listprofile Controller
  */
 
 const list = async (req, res) => {
@@ -109,6 +103,13 @@ const update = async (req, res) => {
       message: "Could not Edit Question with id = " + id,
     });
   }
+};
+
+const listprofile = async (req, res) => {
+  const admin = await userModel.find();
+  return res.json({
+    admin,
+  });
 };
 
 
