@@ -1,7 +1,6 @@
 const userModel = require("../models/Faculty");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-// const { secretJWTKey } = require("../middlewares/verify");
 const { check, validationResult } = require("express-validator");
 
 /**
@@ -33,7 +32,7 @@ const registerUser = async (req, res) => {
       branch: req.body.branch,
     };
 
-    const result = await userModel.create(userData);
+    await userModel.create(userData);
 
     return res.json({
       message: "User registration success",
@@ -91,7 +90,7 @@ const loginUser = async (req, res) => {
   }
 };
 
-const allfaculty = async (req, res) => {
+const studentallfaculty = async (req, res) => {
   const listfaculty = await userModel.find({});
   if (listfaculty !== null) {
     return res.json({
@@ -104,57 +103,61 @@ const allfaculty = async (req, res) => {
   }
 };
 
+const adminallfaculty = async (req, res) => {
+  const listfaculty = await userModel.find({});
+  if (listfaculty !== null) {
+    return res.json({
+      listfaculty: listfaculty,
+    });
+  } else {
+    return res.json({
+      message: "No faculty to display!!",
+    });
+  }
+};
+
+
 /**
  * @Author Lavi
  * @Controller Faculty Update and getProfile Controller
  */
 
 const updateProfile = async (req, res) => {
-    try {
-      console.log(req.params.id);
-      console.log(req.body);
-      const update = await userModel.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-        runValidators: true,
-      });
-      res.status(200).json({
-        status: "success",
-        data: {
-          update,
-        },
-      });
-    } catch (err) {
-      res.status(400).json({
-        status: "fail",
-        message: err,
-      });
-    }
-  };
-  const getProfile = async (req, res) => {
-      try {
-        console.log(req.params.id);
-        console.log(req.body);
-        const profiledetails = await userModel.findById(req.params.id, {
-        });
-        res.status(200).json({
-          status: "success",
-          data: {
-            profiledetails,
-          },
-        });
-      } catch (err) {
-        res.status(400).json({
-          status: "fail",
-          message: err,
-        });
-      }
-    };
-  
+  const id = req.params.id;
+
+  try {
+    await userModel.findByIdAndUpdate(id, req.body);
+    res.json({
+      message: "Profile updated successfully!",
+    });
+  } catch {
+    res.status(500).json({
+      message: "Could not Edit Profile with id = " + id,
+    });
+  }
+};
+
+const getProfile = async (req, res) => {
+  const id = req.params.id;
+  try{
+  const facultyProfile = await userModel.findById(id);
+  return res.json({
+    facultyProfile,
+  });
+}catch{
+  res.status(500).json({
+      message: "Could not find Profile with id = " + id,
+    });
+}
+};
+
+
 
 module.exports = {
   registerUser,
   loginUser,
-  allfaculty,
+  studentallfaculty,
+  adminallfaculty,
   updateProfile,
   getProfile,
 };

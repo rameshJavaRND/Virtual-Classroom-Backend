@@ -5,7 +5,7 @@ const Student = require("../models/Student");
 
 /**
  * @Author Faraz
- * @Controller Student Register,Login  Controller
+ * @Controller Student Register, Login, list Controller
  */
 
 const register = async (req, res) => {
@@ -84,54 +84,39 @@ const list = async (req, res) => {
   });
 };
 
-
 /**
  * @Author Lavi
- * @Controller Student Update, Get Controller
+ * @Controller Student Update and getProfile Controller
  */
 
-
 const updateProfile = async (req, res) => {
-    try {
-      console.log(req.params.id);
-      console.log(req.body);
-      const student = await Student.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-        runValidators: true,
-      });
-      res.status(200).json({
-        status: "success",
-        data: {
-          student,
-        },
-      });
-    } catch (err) {
-      res.status(400).json({
-        status: "fail",
-        message: err,
-      });
-    }
-  };
-  const getProfile = async (req, res) => {
-      try {
-        console.log(req.params.id);
-        console.log(req.body);
-        const student = await Student.findById(req.params.id, {
-        });
-        res.status(200).json({
-          status: "success",
-          data: {
-            student,
-          },
-        });
-      } catch (err) {
-        res.status(400).json({
-          status: "fail",
-          message: err,
-        });
-      }
-    };
-  
+  const id = req.params.id;
+
+  try {
+    await Student.findByIdAndUpdate(id, req.body);
+    res.json({
+      message: "Profile updated successfully!",
+    });
+  } catch {
+    res.status(500).json({
+      message: "Could not Edit Profile with id = " + id,
+    });
+  }
+};
+
+const getProfile = async (req, res) => {
+  const id = req.params.id;
+  try{
+  const studentProfile = await Student.findById(id);
+  return res.json({
+    studentProfile,
+  });
+}catch{
+  res.status(500).json({
+      message: "Could not find Profile with id = " + id,
+    });
+}
+};
 
 
 module.exports = {

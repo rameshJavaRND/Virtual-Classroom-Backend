@@ -5,7 +5,7 @@ const Question = require("../models/Question");
 
 /**
  * @Author Faraz
- * @Controller Question Create, List Controller
+ * @Controller Question Create and List Controller
  */
 
 const create = async (req, res) => {

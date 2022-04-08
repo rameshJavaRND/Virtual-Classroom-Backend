@@ -2,100 +2,66 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const BranchModel = require("../models/Branch");
 
-const addBranch = async(req, res, next) => {
-    try {
-        console.log(req.body);       
-        const { branchName, branchCode } = req.body;
-        if (!branchName || !branchCode) {
-            return res.json({ message: "Please provide inputs" });
-        } 
-        const response = await BranchModel.addBranch(branchName, branchCode);
-        console.log(response);
+/**
+ * @Author Bishal
+ * @Controller Branch add, edit and listall Controller
+ */
 
-        if (response._id) {
-            res.status(200).json({
-                msg:"Success",
-                data: response
-            })
-        }else{
-            console.log(error);
-            return res.json({
-            message: "Something went wrong!!",
-            status: 400,
+const addBranch = async (req, res) => {
+  try {
+    const branchCodeAlreadyExist = await BranchModel.findOne({
+    branchCode: req.body.branchCode,
     });
-        }
-    } catch (error) {
-        console.log(error);
-        return res.json({
-        message: "Something went wrong!!",
-        status: 400,
-    });
+
+    if (branchCodeAlreadyExist) {
+      return res.json({ message: "Branch code already exists!!" });
     }
+
+    let branchData = {
+      branchCode: req.body.branchCode,
+      branchName: req.body.branchName,
+    };
+    const bdata = await BranchModel.create(branchData);
+    return res.json({
+      bdata,
+    });
+  } catch (error) {
+    return res.status(406).send({
+      message: "Unable To Add Branch!",
+    });
+  }
 };
 
-const getAllBranches = async(req, res, next) => {
-    try {
-        const response = await BranchModel.getAllBranches();
-        console.log(response);
-
-        if (response.length > 0) {
-            res.status(200).json({
-                msg:"Success",
-                data: response
-            })
-        }else{
-            console.log(error);
-            return res.json({
-            message: "Something went wrong!!",
-            status: 400,
+const allBranches = async (req, res) => {
+  const listbranches = await BranchModel.find({});
+  if (listbranches !== null) {
+    return res.json({
+      listbranches: listbranches,
     });
-        }
-    } catch (error) {
-        console.log(error);
-        return res.json({
-        message: "Something went wrong!!",
-        status: 400,
+  } else {
+    return res.json({
+      message: "No subject to display!!",
     });
-    }
+  }
 };
 
-const editBranch = async(req, res, next) => {
-    try {
-        const id = req.params.id;
-        if(!id){
-            return res.json({ message: "Please provide branch id" });
-        }
-        const {branchName:branchName, branchCode:branchCode} = req.body;
-        console.log(branchName, branchCode);
-        if(!branchName || !branchCode){
-            return res.json({ message: "Please provide all inputs" });
-        }
-        const response = await BranchModel.editBranch(id,branchName,branchCode);
-        console.log(response);
+const editBranch = async (req, res) => {
+  const id = req.params.id;
 
-        if (response._id) {
-            res.status(200).json({
-                msg:"Success",
-                data: response
-            })
-        }else{
-            console.log(error);
-            return res.json({
-            message: "Something went wrong!!",
-            status: 400,
-            });
-        }
-    } catch (error) {
-        console.log(error);
-        return res.json({
-        message: "Something went wrong!!",
-        status: 400,
+  try {
+    await BranchModel.findByIdAndUpdate(id, req.body);
+    res.json({
+      message: "Branch updated successfully!",
     });
-    }
+  } catch {
+    res.status(500).json({
+      message: "Could not Edit Branch with id = " + id,
+    });
+  }
 };
 
 module.exports = {
   addBranch,
-  getAllBranches,
+  allBranches,
   editBranch,
 };
