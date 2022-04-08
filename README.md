@@ -67,6 +67,7 @@ http://localhost:3000/api/feditProfile/id - edit specific faculty profile detail
 
 
 http://localhost:3000/api/adminLogin - admin login
+http://localhost:3000/api/listprofile - Admin Profile details
 
 
 http://localhost:3000/api/allSubjects - list all subjects
@@ -81,4 +82,21 @@ http://localhost:3000/api/singleFile - upload single file
 http://localhost:3000/api/multipleFiles - upload multiple files
 http://localhost:3000/api/getSingleFiles - fetch single file
 http://localhost:3000/api/getMultipleFiles - fetch all files
+
+
+http://localhost:3000/api/register - Student Register
+http://localhost:3000/api/login - Student Login
+http://localhost:3000/api/student - Get Students Details (Student Token Required)
+
+
+http://localhost:3000/api/question - upload question student (student token required) (POST)
+http://localhost:3000/api/answer - upload answer faculty (faculty token required) (POST)
+http://localhost:3000/api/question - Get Question and Answers List (student token required) (GET)
+http://localhost:3000/api/answer - Get Question and Answers List (faculty token required) (GET)
+
+
+http://localhost:3000/api/deletequestion/id - Delete Specific Question and Answer (Admin Token Required)
+http://localhost:3000/api/editquestion/id - Edit Specific Question and Answer (Admin Token Required)
+http://localhost:3000/api/adminquestion -  Get Question and Answers List For Admin (Admin token required)
+
 ```````````````
