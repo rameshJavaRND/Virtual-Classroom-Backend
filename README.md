@@ -60,43 +60,43 @@ nodemon index.js
 
 ## API routes -
 ``````````````
-http://localhost:3001/api/flogin - faculty login
-http://localhost:3001/api/fregister - faculty register
-http://localhost:3000/api/studentallfaculty - list all faculty for students
-http://localhost:3000/api/adminallfaculty - list all faculty for admin
-http://localhost:3000/api/fgetProfile/id - get specific faculty profile details
-http://localhost:3000/api/feditProfile/id - edit specific faculty profile details
+http://localhost:3001/api/flogin - faculty login (POST)
+http://localhost:3001/api/fregister - faculty register (POST)
+http://localhost:3000/api/studentallfaculty - list all faculty for students (GET)
+http://localhost:3000/api/adminallfaculty - list all faculty for admin (GET)
+http://localhost:3000/api/fgetProfile/id - get specific faculty profile details (GET)
+http://localhost:3000/api/feditProfile/id - edit specific faculty profile details (PUT)
 
 
-http://localhost:3000/api/adminLogin - admin login
-http://localhost:3000/api/listprofile - Admin Profile details
+http://localhost:3000/api/adminLogin - Admin login (POST)
+http://localhost:3000/api/listprofile - Admin Profile details (GET)
 
 
-http://localhost:3000/api/allSubjects - list all subjects
-http://localhost:3000/api/allBranches - list all branches
-http://localhost:3000/api/addSubject - add subject
-http://localhost:3000/api/addBranch - add branch
-http://localhost:3000/api/editSubject/id - edit subject
-http://localhost:3000/api/editBranch/id - edit branch
+http://localhost:3000/api/allSubjects - List all subjects (GET)
+http://localhost:3000/api/allBranches - List all branches (GET)
+http://localhost:3000/api/addSubject - Add Subject (POST)
+http://localhost:3000/api/addBranch - Add Branch (POST)
+http://localhost:3000/api/editSubject/id - Edit Subject (PUT)
+http://localhost:3000/api/editBranch/id - Edit Branch (PUT)
 
 
-http://localhost:3000/api/singleFile - upload single file
-http://localhost:3000/api/multipleFiles - upload multiple files
-http://localhost:3000/api/getSingleFiles - fetch single file
-http://localhost:3000/api/getMultipleFiles - fetch all files
+http://localhost:3000/api/singleFile - Upload single file (POST)
+http://localhost:3000/api/multipleFiles - Upload multiple files (POST)
+http://localhost:3000/api/getSingleFiles - Fetch single file (GET)
+http://localhost:3000/api/getMultipleFiles - Fetch all files (GET)
 
 
-http://localhost:3000/api/register - Student Register
-http://localhost:3000/api/login - Student Login
-http://localhost:3000/api/student - Get Students Details (Student Token Required)
+http://localhost:3000/api/register - Student Register (POST)
+http://localhost:3000/api/login - Student Login (POST)
+http://localhost:3000/api/student - Get Students Details (Student Token Required) (GET)
 
 
-http://localhost:3000/api/question - upload question student (student token required) (POST)
-http://localhost:3000/api/answer - upload answer faculty (faculty token required) (POST)
+http://localhost:3000/api/question - Upload Question Student (student token required) (POST)
+http://localhost:3000/api/answer - Upload Answer Faculty (faculty token required) (POST)
 http://localhost:3000/api/question - Get Question and Answers List (student token required) (GET)
 http://localhost:3000/api/answer - Get Question and Answers List (faculty token required) (GET)
 
 
-http://localhost:3000/api/deletequestion/id - Delete Specific Question and Answer (Admin Token Required)
-http://localhost:3000/api/editquestion/id - Edit Specific Question and Answer (Admin Token Required)
-http://localhost:3000/api/adminquestion -  Get Question and Answers List For Admin (Admin token required)
+http://localhost:3000/api/deletequestion/id - Delete Specific Question and Answer (Admin Token Required) (DELETE)
+http://localhost:3000/api/editquestion/id - Edit Specific Question and Answer (Admin Token Required) (PUT)
+http://localhost:3000/api/adminquestion -  Get Question and Answers List For Admin (Admin token required) (GET)
