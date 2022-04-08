@@ -69,7 +69,6 @@ const login = async (req, res) => {
       access_token: token,
     });
   } catch (error) {
-    console.log(error);
     return res.status(406).send({
       message: "Unable To Login!",
     });

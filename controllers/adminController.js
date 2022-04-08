@@ -55,7 +55,7 @@ const login = async (req, res) => {
 
 
 /**
- * @Author Faraz, Bishal
+ * @Author Faraz
  * @Controller List, Edit, Delete Question and Listprofile Controller
  */
 
