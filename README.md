@@ -45,27 +45,41 @@ d)      Question/Ans
 It displays a list of  questions asked by students/answers to questions by teachers. The administrator has the power to delete questions/answers from the list.
 
 
-## Install the app -
 
-```
+## Install these -
+```````````````````
 npm install
-cp config.env.template config.env
-```
+npm install bcrypt
+npm install multer
+
 
 Run the app -
-
-```
+````````````
 nodemon index.js
-```
+
 
 ## API routes -
+``````````````
+http://localhost:3001/api/flogin - faculty login
+http://localhost:3001/api/fregister - faculty register
+http://localhost:3000/api/studentallfaculty - list all faculty for students
+http://localhost:3000/api/adminallfaculty - list all faculty for admin
+http://localhost:3000/api/fgetProfile/id - get specific faculty profile details
+http://localhost:3000/api/feditProfile/id - edit specific faculty profile details
 
-```
-Faculty routes
 
-a) faculty login
-http://localhost:3001/api/flogin
+http://localhost:3000/api/adminLogin - admin login
 
 
-b) faculty signup
-http://localhost:3001/api/fregister
+http://localhost:3000/api/allSubjects - list all subjects
+http://localhost:3000/api/allBranches - list all branches
+http://localhost:3000/api/addSubject - add subject
+http://localhost:3000/api/addBranch - add branch
+http://localhost:3000/api/editSubject/id - edit subject
+http://localhost:3000/api/editBranch/id - edit branch
+
+
+http://localhost:3000/api/singleFile - upload single file
+http://localhost:3000/api/multipleFiles - upload multiple files
+http://localhost:3000/api/getSingleFiles - fetch single file
+http://localhost:3000/api/getMultipleFiles - fetch all files
