@@ -1,4 +1,4 @@
-const AdminModel = require("../models/Admin");
+const userModel = require("../models/Admin");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -6,13 +6,13 @@ const Answer = require("../models/Answer");
 const Question = require("../models/Question");
 
 /**
- * @Author Mukul, Abhishek
- * @Controller Login, Showdetails Controller
+ * @Author Mukul
+ * @Controller Login Controller
  */
 
 const login = async (req, res) => {
   try {
-    const admin = await AdminModel
+    const admin = await userModel
       .findOne({
         username: req.body.username,
       })
@@ -52,26 +52,9 @@ const login = async (req, res) => {
   }
 };
 
-// const showDetails = async (req, res) => {
-//     try {
-//         const id=req.params.id;
-//         const admin_data = await AdminModel.findById(id)
-//         return res.json(admin_data);
-//     } catch (error) {
-//         return res.send(error);
-//     }
-// }
-
-const listprofile = async (req, res) => {
-  const admin = await AdminModel.find();
-  return res.json({
-    admin,
-  });
-};
-
 /**
- * @Author Faraz, Bishal
- * @Controller List, Edit, Delete Question Controller
+ * @Author Faraz
+ * @Controller List, Edit, Delete Question and Listprofile Controller
  */
 
 const list = async (req, res) => {
@@ -83,6 +66,7 @@ const list = async (req, res) => {
     .populate({
       path: "answer",
     });
+
   return res.json({
     questions,
   });
@@ -106,16 +90,24 @@ const destroy = async (req, res) => {
 
 const update = async (req, res) => {
   const id = req.params.id;
+
   try {
     await Question.findByIdAndUpdate(id, req.body);
     res.json({
-      message: "Question and answer updated successfully!",
+      message: "Question updated successfully!",
     });
   } catch {
     res.status(500).json({
-      message: "Could not Edit Question answer with id = " + id,
+      message: "Could not Edit Question with id = " + id,
     });
   }
+};
+
+const listprofile = async (req, res) => {
+  const admin = await userModel.find();
+  return res.json({
+    admin,
+  });
 };
 
 module.exports = {
@@ -123,6 +115,5 @@ module.exports = {
   list,
   update,
   destroy,
-  // showDetails,
-  listprofile
+  listprofile,
 };

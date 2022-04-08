@@ -1,7 +1,6 @@
 const userModel = require("../models/Faculty");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-// const { secretJWTKey } = require("../middlewares/verify");
 const { check, validationResult } = require("express-validator");
 
 /**
@@ -33,14 +32,13 @@ const registerUser = async (req, res) => {
       branch: req.body.branch,
     };
 
-    const result = await userModel.create(userData);
+    await userModel.create(userData);
 
     return res.json({
       message: "User registration success",
       status: 200,
     });
   } catch (err) {
-    console.log(err);
     return res.json({
       message: "Something went wrong!!",
       status: 500,
@@ -83,7 +81,6 @@ const loginUser = async (req, res) => {
     );
     return res.json({ message: "Login succesfull!", token });
   } catch (err) {
-    console.log(err);
     return res.json({
       message: "Something went wrong!!",
       status: 500,
@@ -91,8 +88,21 @@ const loginUser = async (req, res) => {
   }
 };
 
-const allfaculty = async (req, res) => {
-  const listfaculty = await userModel.find();
+const studentallfaculty = async (req, res) => {
+  const listfaculty = await userModel.find({});
+  if (listfaculty !== null) {
+    return res.json({
+      listfaculty: listfaculty,
+    });
+  } else {
+    return res.json({
+      message: "No faculty to display!!",
+    });
+  }
+};
+
+const adminallfaculty = async (req, res) => {
+  const listfaculty = await userModel.find({});
   if (listfaculty !== null) {
     return res.json({
       listfaculty: listfaculty,
@@ -110,38 +120,30 @@ const allfaculty = async (req, res) => {
  */
 
 const updateProfile = async (req, res) => {
+  const id = req.params.id;
+
   try {
-    const update = await userModel.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
+    await userModel.findByIdAndUpdate(id, req.body);
+    res.json({
+      message: "Profile updated successfully!",
     });
-    res.status(200).json({
-      status: "success",
-      data: {
-        update,
-      },
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: "fail",
-      message: err,
+  } catch {
+    res.status(500).json({
+      message: "Could not Edit Profile with id = " + id,
     });
   }
 };
 
 const getProfile = async (req, res) => {
+  const id = req.params.id;
   try {
-    const profiledetails = await userModel.findById(req.params.id, {});
-    res.status(200).json({
-      status: "success",
-      data: {
-        profiledetails,
-      },
+    const facultyProfile = await userModel.findById(id);
+    return res.json({
+      facultyProfile,
     });
-  } catch (err) {
-    res.status(400).json({
-      status: "fail",
-      message: err,
+  } catch {
+    res.status(500).json({
+      message: "Could not find Profile with id = " + id,
     });
   }
 };
@@ -149,7 +151,8 @@ const getProfile = async (req, res) => {
 module.exports = {
   registerUser,
   loginUser,
-  allfaculty,
+  studentallfaculty,
+  adminallfaculty,
   updateProfile,
   getProfile,
 };
